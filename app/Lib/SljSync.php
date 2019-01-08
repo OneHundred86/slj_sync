@@ -38,7 +38,7 @@ class SljSync
       'data' => $data,
     ];
 
-    if(!self::post('?c=core&a=call&_m=slj.putData', $params))
+    if(self::post('?c=core&a=call&_m=slj.putData', $params) === false)
       return false;
 
     return true;
