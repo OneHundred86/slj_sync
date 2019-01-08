@@ -51,7 +51,7 @@ class SyncData extends Command
         DB::table('stu.ST_PPTN_R')->orderBy('gdwr_mddt')
             ->where('gdwr_mddt', '>=', $from_time)
             ->chunk(100, function($list){
-                echo sprintf('  %d条', $list->count()) . PHP_EOL;
+                echo sprintf('  post %d条 ', $list->count());
 
                 $data = [];
                 foreach($list as $v){
@@ -66,7 +66,12 @@ class SyncData extends Command
                     ];
                 }
 
-                SljSyncLib::sync_data($table, $data);
+                if(SljSyncLib::sync_data($table, $data))
+                    echo '成功';
+                else
+                    echo '失败';
+
+                echo PHP_EOL;
             }
         );
     }

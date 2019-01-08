@@ -27,6 +27,7 @@ class SljSync
     return env('SLJ_SYNC_FROMTIME');
   }
 
+  # => true | false
   public static function sync_data($table, array $data){
     $now = time();
 
@@ -37,7 +38,10 @@ class SljSync
       'data' => $data,
     ];
 
-    return self::post('?c=core&a=call&_m=slj.putData', $params);
+    if(!self::post('?c=core&a=call&_m=slj.putData', $params))
+      return false;
+
+    return true;
   }
 
   public static function gen_token($time){
