@@ -43,11 +43,13 @@ class TestOracle extends Command
         $res = \DB::table('stu.ST_PPTN_R')->first();
         // dd($res);
 
+
         \DB::table('stu.ST_PPTN_R')->orderBy('gdwr_mddt')
-            ->limit(100)
+            ->where('gdwr_mddt', '>=', date('Y-m-d H:i:s', time() - 3600))
             ->chunk(10, function($list){
                 foreach($list as $v){
                     var_dump($v);
+                    echo PHP_EOL;
                 }
             }
         );
