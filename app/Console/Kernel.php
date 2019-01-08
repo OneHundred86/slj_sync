@@ -27,6 +27,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->job(new Commands\Slj\SyncData)->everyFifteenMinutes();
     }
 
     /**
