@@ -41,6 +41,21 @@ class TestOracle extends Command
         # $res = \DB::select('select count(*) from stu.ST_PPTN_R');
         
         $res = \DB::table('stu.ST_PPTN_R')->first();
-        dd($res);
+        // dd($res);
+
+        \DB::table('stu.ST_PPTN_R')->orderBy('gdwr_mddt')
+            ->limit(100)
+            ->chunk(10, function($list){
+                foreach($list as $v){
+                    var_dump($v);
+                }
+            }
+        );
     }
 }
+
+
+
+
+
+
