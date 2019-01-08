@@ -21,7 +21,9 @@ class SljSync
 
     $time = self::post('?c=core&a=call&_m=slj.getLastestTime', $params);
 
-    if($time)
+    if($time === false)
+      throw new \Exception("fail to get lastest_modtime", 1);
+    elseif($time)
       return date('Y-m-d H:i:s', $time);
 
     return env('SLJ_SYNC_FROMTIME');
@@ -35,7 +37,7 @@ class SljSync
       'table' => $table,
       'time' => $now,
       'token' => self::gen_token($now),
-      'data' => $data,
+      'data' => json_encode($data),
     ];
 
     if(self::post('?c=core&a=call&_m=slj.putData', $params) === false)
