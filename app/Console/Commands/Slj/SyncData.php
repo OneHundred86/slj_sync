@@ -50,7 +50,7 @@ class SyncData extends Command
         echo sprintf('sync table %s from %s', $table, $from_time) . PHP_EOL;
         DB::table('stu.ST_PPTN_R')->orderBy('gdwr_mddt')
             ->where('gdwr_mddt', '>=', $from_time)
-            ->chunk(100, function($list){
+            ->chunk(100, function($list) use ($table){
                 echo sprintf('  post %d条 ', $list->count());
 
                 $data = [];
