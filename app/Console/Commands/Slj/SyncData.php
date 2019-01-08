@@ -88,7 +88,7 @@ class SyncData extends Command
     }
 
     private function sync_river(){
-        $table = 'rain';
+        $table = 'river';
         $from_time = SljSyncLib::get_lastest_modtime($table);
         // dd($from_time);
 
