@@ -57,7 +57,9 @@ class SyncData extends Command
 
         echo sprintf('sync table %s from %s', $table, $from_time) . PHP_EOL;
         Log::info("同步 $table 表开始...");
-        DB::table('stu.ST_PPTN_R')->orderBy('gdwr_mddt')
+
+        $sljTable = SljSyncLib::toSljTable($table);
+        DB::table($sljTable)->orderBy('gdwr_mddt')
             ->where('gdwr_mddt', '>=', $from_time)
             ->chunk(1000, function($list) use ($table){
                 echo sprintf('  post %d条 ', $list->count());
@@ -94,7 +96,9 @@ class SyncData extends Command
 
         echo sprintf('sync table %s from %s', $table, $from_time) . PHP_EOL;
         Log::info("同步 $table 表开始...");
-        DB::table('stu.ST_RIVER_R')->orderBy('gdwr_mddt')
+
+        $sljTable = SljSyncLib::toSljTable($table);
+        DB::table($sljTable)->orderBy('gdwr_mddt')
             ->where('gdwr_mddt', '>=', $from_time)
             ->chunk(1000, function($list) use ($table){
                 echo sprintf('  post %d条 ', $list->count());
@@ -129,7 +133,9 @@ class SyncData extends Command
 
         echo sprintf('sync table %s from %s', $table, $from_time) . PHP_EOL;
         Log::info("同步 $table 表开始...");
-        DB::table('stu.ST_RSVR_R')->orderBy('gdwr_mddt')
+        
+        $sljTable = SljSyncLib::toSljTable($table);
+        DB::table($sljTable)->orderBy('gdwr_mddt')
             ->where('gdwr_mddt', '>=', $from_time)
             ->chunk(1000, function($list) use ($table){
                 echo sprintf('  post %d条 ', $list->count());
@@ -166,7 +172,9 @@ class SyncData extends Command
 
         echo sprintf('sync table %s from %s', $table, $from_time) . PHP_EOL;
         Log::info("同步 $table 表开始...");
-        DB::table('stu.ST_TIDE_R')->orderBy('gdwr_mddt')
+        
+        $sljTable = SljSyncLib::toSljTable($table);
+        DB::table($sljTable)->orderBy('gdwr_mddt')
             ->where('gdwr_mddt', '>=', $from_time)
             ->chunk(1000, function($list) use ($table){
                 echo sprintf('  post %d条 ', $list->count());
@@ -202,7 +210,9 @@ class SyncData extends Command
 
         echo sprintf('sync table %s from %s', $table, $from_time) . PHP_EOL;
         Log::info("同步 $table 表开始...");
-        DB::table('stu.ST_STBPRP_B')->orderBy('gdwr_mddt')
+        
+        $sljTable = SljSyncLib::toSljTable($table);
+        DB::table($sljTable)->orderBy('gdwr_mddt')
             ->where('gdwr_mddt', '>=', $from_time)
             ->chunk(1000, function($list) use ($table){
                 echo sprintf('  post %d条 ', $list->count());
@@ -240,7 +250,9 @@ class SyncData extends Command
 
         echo sprintf('sync table %s from %s', $table, $from_time) . PHP_EOL;
         Log::info("同步 $table 表开始...");
-        DB::table('stu.ST_RVFCCH_B')->orderBy('gdwr_mddt')
+        
+        $sljTable = SljSyncLib::toSljTable($table);
+        DB::table($sljTable)->orderBy('gdwr_mddt')
             ->where('gdwr_mddt', '>=', $from_time)
             ->chunk(1000, function($list) use ($table){
                 echo sprintf('  post %d条 ', $list->count());
@@ -273,7 +285,9 @@ class SyncData extends Command
 
         echo sprintf('sync table %s from %s', $table, $from_time) . PHP_EOL;
         Log::info("同步 $table 表开始...");
-        DB::table('stu.ST_RSVRFCCH_B')->orderBy('gdwr_mddt')
+        
+        $sljTable = SljSyncLib::toSljTable($table);
+        DB::table($sljTable)->orderBy('gdwr_mddt')
             ->where('gdwr_mddt', '>=', $from_time)
             ->chunk(1000, function($list) use ($table){
                 echo sprintf('  post %d条 ', $list->count());
@@ -308,7 +322,9 @@ class SyncData extends Command
 
         echo sprintf('sync table %s from %s', $table, $from_time) . PHP_EOL;
         Log::info("同步 $table 表开始...");
-        DB::table('stu.ST_RSVRFSR_B')->orderBy('gdwr_mddt')
+        
+        $sljTable = SljSyncLib::toSljTable($table);
+        DB::table($sljTable)->orderBy('gdwr_mddt')
             ->where('gdwr_mddt', '>=', $from_time)
             ->chunk(1000, function($list) use ($table){
                 echo sprintf('  post %d条 ', $list->count());

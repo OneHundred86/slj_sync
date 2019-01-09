@@ -20,13 +20,50 @@ class SljSync
     ];
 
     $time = self::post('?c=core&a=call&_m=slj.getLastestTime', $params);
+    $env_fromtime = env('SLJ_SYNC_FROMTIME', date('Y-m-d H:i:s', 0));
 
     if($time === false)
       throw new \Exception("fail to get lastest_modtime", 1);
-    elseif($time)
-      return date('Y-m-d H:i:s', $time);
+    elseif($time){
+      return max(date('Y-m-d H:i:s', $time), $env_fromtime);
+    }
 
-    return env('SLJ_SYNC_FROMTIME');
+    return $env_fromtime;
+  }
+
+  // 由表名获取水利局数据库的表名
+  # => string
+  public static function toSljTable($table){
+    switch ($table) {
+      case 'rain':
+        return 'stu.ST_PPTN_R';
+        break;
+      case 'river':
+        return 'stu.ST_RIVER_R';
+        break;
+      case 'shuiku':
+        return 'stu.ST_RSVR_R';
+        break;
+      case 'chaoxi':
+        return 'stu.ST_TIDE_R';
+        break;
+      case 'station':
+        return 'stu.ST_STBPRP_B';
+        break;
+      case 'river_fh':
+        return 'stu.ST_RVFCCH_B';
+        break;
+      case 'shuiku_fh':
+        return 'stu.ST_RSVRFCCH_B';
+        break;
+      case 'shuiku_xx':
+        return 'stu.ST_RSVRFSR_B';
+        break;
+      
+      default:
+        throw new \Exception("未定义的table: $table", 1);
+        break;
+    }
   }
 
   # => true | false
