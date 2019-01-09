@@ -4,6 +4,7 @@ namespace App\Console\Commands\Slj;
 
 use Illuminate\Console\Command;
 use App\Lib\SljSync as SljSyncLib;
+use App\Lib\SljMail as SljMailLib;
 use DB;
 use Log;
 
@@ -48,6 +49,9 @@ class SyncData extends Command
         $this->sync_river_fh();
         $this->sync_shuiku_fh();
         $this->sync_shuiku_xx();
+
+        # 发送邮件通知
+        SljMailLib::notice();
     }
 
     private function sync_rain(){
@@ -86,6 +90,8 @@ class SyncData extends Command
             }
         );
 
+        # 检测表数据的最新时间，超过时间限制就发送邮件通知
+        SljMailLib::checkTableTimeAndAddMailContent($sljTable);
         Log::info("同步 $table 表完成");
     }
 
@@ -123,6 +129,8 @@ class SyncData extends Command
             }
         );
 
+        # 检测表数据的最新时间，超过时间限制就发送邮件通知
+        SljMailLib::checkTableTimeAndAddMailContent($sljTable);
         Log::info("同步 $table 表完成");
     }
 
@@ -162,6 +170,8 @@ class SyncData extends Command
             }
         );
 
+        # 检测表数据的最新时间，超过时间限制就发送邮件通知
+        SljMailLib::checkTableTimeAndAddMailContent($sljTable);
         Log::info("同步 $table 表完成");
     }
 
