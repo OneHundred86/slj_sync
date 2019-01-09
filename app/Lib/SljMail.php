@@ -15,7 +15,7 @@ class SljMail
   public function __construct(){
   }
 
-  public static function checkTableTimeAndAddMailContent($sljTable, $timeCol = 'tm'){
+  public static function checkTableTimeAndAddMailContent($sljTable, $timeCol = 'gdwr_mddt'){
     $datetime = DB::table($sljTable)->max($timeCol);
     if(!$datetime)
       return;
